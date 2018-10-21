@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        <input type="button" value="按钮" id="btn1">
+        <input type="button" value="第二个" id="btn2">
+        <input type="button" value="干掉第一个" id="btn3">
+    </div>
+    <script>
+        let btn1 = document.getElementById('btn1');
+        let btn2 = document.getElementById('btn2');
+        let btn3 = document.getElementById('btn3');
+        let box = document.getElementById('box');
+
+
+
+        function f1 () {
+            console.log('第一个');
+        }
+
+        function f2 () {
+            console.log('第二个');
+        }
+
+        function f3 () {
+            console.log('div');
+        }
+
+        function addEventListener (element, type, fn) {
+            if(element.addEventListener) {
+                // 第三个参数默认是false 时间冒泡 true是时间捕获
+                element.addEventListener(type, fn, true);
+            } else if (element.attachEvent) {
+                element.attachEvent('on' + type, fn)
+            } else {
+                element['on' + type] = fn;
+            }
+        }
+
+        function removeEventListener (element, type, fnName) {
+            if (element.removeEventListener) {
+                element.removeEventListener(type, fnName, false)
+            } else if (element.detachEvent) {
+                element.detachEvent('on' + type, fnName);
+            } else {
+                element['on' + type] = null;
+            }
+        }
+
+        addEventListener(btn1, 'click', f1);
+        addEventListener(btn2, 'click', f2);
+        // addEventListener(box, 'click', f3);
+        btn3.onclick = function () {
+            removeEventListener(btn1, 'click', f1);
+        }
+    </script>
+</body>
+</html>
