@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #div {
+            width: 200px;
+            height: 300px;
+            position: absolute;
+            top: 200px;
+            background-color: #ccc;
+        }
+        span {
+            width: 20px;
+            height: 60px;
+            background-color: yellow;
+            text-align: center;
+            line-height: 20px;
+            position: absolute;
+            left: 200px;
+            margin-top: 50%;
+            transform: translateY(50%);
+        }
+    </style>
+</head>
+<body>
+    <div id="div">
+        <span>分享到</span>
+    </div>
+    <script>
+        window.onload = function () {
+            let left = -200;
+            let div = document.getElementById('div');
+            let span = document.querySelectorAll('span');
+            console.log(span);
+            div.style.left = left + 'px';
+            span.addEventListener('click')
+
+        }
+    </script>
+</body>
+</html>
