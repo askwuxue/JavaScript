@@ -16,6 +16,9 @@
     <script>
         window.onload = function () {
             let img = document.querySelectorAll('img')[0];
+            // opacity 不能通过 style的属性中获得
+            // console.log(img.style.opacity);
+            // 利用整数解决opacity的问题，然后转成小数 解决小数精度不准确的问题
             let opacity = 30;
             let timer = null;
             let skip = 0;
@@ -28,18 +31,25 @@
                 clearInterval(timer);
                 timer = setInterval(() => {
                 // 0.1 + 0.2 != 0.3的问题
-                if (opacity === target) {
-                    clearInterval(timer);
-                } else {
-                    console.log(opacity);
+                if (Math.abs(target - opacity) > Math.abs(skip)) {
                     opacity += skip;
-                    img.style.opacity = opacity / 100;
+                    img.style.opacity = opacity / 100; 
+                    console.log(opacity);
+                } else {
+                    img.style.opacity = target / 100;
                 }
+                // if (opacity >= target) {
+                //     clearInterval(timer);
+                // } else {
+                //     console.log(opacity);
+                //     opacity += skip;
+                //     img.style.opacity = opacity / 100;
+                // }
             }, 30)
         }   
 
         img.onmouseenter = function () {
-            moveStart(100);
+            moveStart(91);
         }
         img.onmouseleave = function () {
             moveStart(30);

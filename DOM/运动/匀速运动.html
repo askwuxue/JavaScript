@@ -38,20 +38,25 @@
                     } else {
                         skip = -7;
                     }
-                    
+                    // 目标距离与当前距离的绝对值大于步数
                     if (Math.abs(target - div.offsetLeft) > Math.abs(skip)) {
                         div.style.left = div.offsetLeft + skip + 'px';
                         // console.log(div.offsetLeft);
                     } else {
                         div.style.left = target + 'px';
                         clearInterval(timer);
-                        console.log(div.style.left);
+                        // console.log(div.style.left);
                     }
                 }, 10)
             }
-            btn.onclick = function () {
+            btn.addEventListener('click', () => {
+                console.log('btn');
                 moveStart(300);
-            }
+            }, false);
+            
+            document.body.addEventListener('click', () => {
+                console.log('body');
+            })
         }
     </script>
 </body>

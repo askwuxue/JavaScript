@@ -8,7 +8,7 @@
     <style>
         #div {
             width: 200px;
-            height: 300px;
+            height: 200px;
             position: absolute;
             top: 200px;
             left: -200px;
@@ -22,8 +22,9 @@
             line-height: 20px;
             position: absolute;
             left: 200px;
+            /* 相对于最近的父级的块级元素的width */
             margin-top: 50%;
-            transform: translateY(50%);
+            transform: translateY(-50%);
         }
     </style>
 </head>
@@ -35,13 +36,9 @@
         window.onload = function () {
             let left = -200;
             let div = document.getElementById('div');
-            let span = document.querySelectorAll('span');
+            let span = document.querySelectorAll('span')[0];
             let skip = 0;
-            // div.style.left = left + 'px';
-            // 只对部分input 和textarea 有效
-            // span.addEventListener('mouseenter', () => {
-                
-            // })
+            
             let timer = null;
             let moveStart = (target) => {
                 if (target > div.offsetLeft) {
@@ -58,14 +55,18 @@
                 }
             }, 30)
         }
-
-            div.onmouseover = function () {
+            /* mouseenter/mouseover  mouseleave/mouseout 基本一致区别在于前者不会冒泡 */
+            /* mousedown/mouseup 对于鼠标按下 抬起时间 */
+            div.addEventListener('mouseenter', () => {
+                // console.log(this);
+                console.log('enter');
                 moveStart(0);
-            }
+            })
 
-            div.onmouseleave = function () {
+            div.addEventListener('mouseleave', () => {
+                console.log('leave');
                 moveStart(-200)
-            }
+            })
 
         }
     </script>
