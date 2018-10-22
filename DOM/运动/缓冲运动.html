@@ -50,8 +50,9 @@
                         skip = Math.ceil((target - div.offsetLeft) / 7);
                     } else {
                         skip = Math.floor((target - div.offsetLeft) / 7);
-                    }            
-                    // // 目标位置小于当前位置
+                    } 
+                    // 缓冲运动最小步数为1 会正好到达目标点
+                    // 目标位置小于当前位置
                     if (target === div.offsetLeft) {
                         clearInterval(timer);
                     } else {
