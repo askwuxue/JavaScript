@@ -11,6 +11,7 @@
             height: 300px;
             position: absolute;
             top: 200px;
+            left: -200px;
             background-color: #ccc;
         }
         span {
@@ -35,9 +36,36 @@
             let left = -200;
             let div = document.getElementById('div');
             let span = document.querySelectorAll('span');
-            console.log(span);
-            div.style.left = left + 'px';
-            span.addEventListener('click')
+            let skip = 0;
+            // div.style.left = left + 'px';
+            // 只对部分input 和textarea 有效
+            // span.addEventListener('mouseenter', () => {
+                
+            // })
+            let timer = null;
+            let moveStart = (target) => {
+                if (target > div.offsetLeft) {
+                    skip = 10;
+                } else {
+                    skip = -10;
+                }
+                clearInterval(timer);
+                timer = setInterval(() => {
+                if (div.offsetLeft == target) {
+                    clearInterval(timer);
+                } else {
+                    div.style.left = div.offsetLeft + skip + 'px';                    
+                }
+            }, 30)
+        }
+
+            div.onmouseover = function () {
+                moveStart(0);
+            }
+
+            div.onmouseleave = function () {
+                moveStart(-200)
+            }
 
         }
     </script>
