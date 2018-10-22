@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        div {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            background-color: red;
+        }
+        #btn {
+            margin-top: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div id="div"></div>
+    <input type="button" id="btn" value="开始">
+    <script>
+        window.onload = function () {
+            let div = document.getElementById('div');
+            let btn = document.getElementById('btn');
+            let timer = null;
+            let skip = 0;
+            let moveStart = function (target) {
+                clearInterval(timer);
+                timer = setInterval(() => {
+                    if (target > div.offsetLeft) {
+                        skip = 7;
+                    } else {
+                        skip = -7;
+                    }
+                    
+                    if (Math.abs(target - div.offsetLeft) > Math.abs(skip)) {
+                        div.style.left = div.offsetLeft + skip + 'px';
+                        // console.log(div.offsetLeft);
+                    } else {
+                        div.style.left = target + 'px';
+                        clearInterval(timer);
+                        console.log(div.style.left);
+                    }
+                }, 10)
+            }
+            btn.onclick = function () {
+                moveStart(300);
+            }
+        }
+    </script>
+</body>
+</html>

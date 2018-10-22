@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            border: 0;
+            margin: 0;
+        }
+        #div {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+         }
+         #div2 {
+             width: 1px;
+             height: 300px;
+             background-color: #000;
+             position: absolute;
+             margin-left: 500px;
+         }
+         input {
+             margin-top: 200px;
+         }
+    </style>
+</head>
+<body>
+    <div id="div"></div>
+    <div id="div2"></div>
+    <input type="button" id="btn" value="开始"><br />
+    <input type="button" id="btn2" value="归位">
+
+    <script>
+        window.onload = function () {
+            let div = document.getElementById('div');
+            let btn = document.getElementById('btn');
+            let btn2 = document.getElementById('btn2');
+            let timer = null;
+            let skip = 0;
+            console.log(div.offsetLeft)
+            let moveStart = (target) => {
+                clearInterval(timer);
+                timer = setInterval(() => {
+                    // 目标点大于当前位置
+                    if (target > div.offsetLeft) {
+                        skip = Math.ceil((target - div.offsetLeft) / 7);
+                    } else {
+                        skip = Math.floor((target - div.offsetLeft) / 7);
+                    }            
+                    // // 目标位置小于当前位置
+                    if (target === div.offsetLeft) {
+                        clearInterval(timer);
+                    } else {
+                        div.style.left = div.offsetLeft + skip + 'px';
+                        console.log(div.offsetLeft)
+                    }
+                    
+                    // skip = target > div.offsetLeft ? Math.ceil((target - div.offsetLeft) / 8) : Math.floor
+                }, 30)
+            }
+            
+            let fn = function () {
+                moveStart(500);
+            }
+            let fn1 = function () {
+                moveStart(0);
+            }
+
+            btn.addEventListener('click', fn, true);
+            btn2.addEventListener('click', fn1, true);
+            
+        }
+    </script>
+</body>
+</html>

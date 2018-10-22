@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        img {
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+    <img src="../../images/01.jpg" alt="" >
+    <script>
+        window.onload = function () {
+            let img = document.querySelectorAll('img')[0];
+            let opacity = 30;
+            let timer = null;
+            let skip = 0;
+            let moveStart = function (target) {
+                if (target > opacity) {
+                    skip = 5;
+                } else {
+                    skip = -5;
+                }
+                clearInterval(timer);
+                timer = setInterval(() => {
+                // 0.1 + 0.2 != 0.3的问题
+                if (opacity === target) {
+                    clearInterval(timer);
+                } else {
+                    console.log(opacity);
+                    opacity += skip;
+                    img.style.opacity = opacity / 100;
+                }
+            }, 30)
+        }   
+
+        img.onmouseenter = function () {
+            moveStart(100);
+        }
+        img.onmouseleave = function () {
+            moveStart(30);
+        }
+        }
+    </script>
+</body>
+</html>
