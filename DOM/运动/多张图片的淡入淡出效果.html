@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            opacity: .3;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <script>
+        window.onload = function () {
+            let elementsList = document.getElementsByTagName('div');
+            for (let i = 0; i < elementsList.length; i++) {
+                elementsList[i].timer = null;
+                // 给每一个元素单独的opacity
+                elementsList[i].opacity = 30;
+                elementsList[i].onmouseenter = function () {
+                    moveStart(this, 100)
+                }
+
+                elementsList[i].onmouseleave = function () {
+                    moveStart(this, 30);
+                }
+            }
+        }
+        let moveStart = function (element, target) {
+            let skip = 0;
+            clearInterval(element.timer);
+            element.timer = setInterval(() => {
+                if (target > element.opacity) {
+                    skip = Math.ceil((target - element.opacity) / 7);
+                    // skip = 1;
+                } else {
+                    skip = Math.floor((target - element.opacity) / 7);
+                    // skip = -1;
+                }
+
+                if (target === element.opacity) {
+                    clearInterval(element.timer);
+                } else {
+                    element.opacity += skip;
+                    element.style.opacity = element.opacity / 100;
+                }
+            }, 30)
+        }
+    </script>
+</body>
+</html>

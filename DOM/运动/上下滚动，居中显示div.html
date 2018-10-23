@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            height: 2000px;
+        }
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+        let div = document.querySelector('div');
+        div.style.top = (document.documentElement.clientHeight - div.offsetHeight) / 2 + 'px';
+        window.onload = function () {
+            let timer = null;
+            clearInterval(timer);
+            let skip = 0;
+            let moveStart = function () {
+                timer = setInterval(() => {
+                    let scrollTop = document.scrollTop;
+                    console.log(scrollTop);
+                }, 30)
+            }
+
+            window = function () {
+                console.log('aaa');
+                moveStart();
+            }
+        }
+    </script>
+</body>
+</html>

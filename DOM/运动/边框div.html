@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+        // 获取非内敛宽度
+        let getStyle = function (element, attr) {
+            if (element.currentStyle) {
+                return element.currentStyle[attr];
+            } else {
+                return getComputedStyle(element, false)[attr];
+            }
+        }
+        let div = document.querySelector('div');
+        let timer = null;
+        window.onload = function () {
+            div.onmouseenter = function () {
+              moveStart(1);
+            }
+
+            div.onmouseleave = function () {
+                moveStart(-1);
+            }
+        }
+        let moveStart = function (skip) {
+                clearInterval(timer);
+                timer = setInterval(() => {
+                    div.style.width = parseInt(getStyle(div, 'width')) + skip + 'px';
+                },30)
+            } 
+    </script>
+</body>
+</html>
