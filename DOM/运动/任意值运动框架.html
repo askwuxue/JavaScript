@@ -23,12 +23,11 @@
     <div id="div">3</div>
     <div>4</div>
 
+    <script src="./简易版元素自身运动属性封装.js"></script>
     <script>
-
         window.onload = function () {
             let elementsList = document.getElementsByTagName('div');
             elementsList[0].onmouseenter = function () {
-                // console.log('aaa')
                 moveStart(this, 'width', 300);
             }
             elementsList[0].onmouseleave = function () {
@@ -36,7 +35,6 @@
             }
 
             elementsList[1].onmouseenter = function () {
-                // console.log('aaa')
                 moveStart(this, 'height', 300);
             }
             elementsList[1].onmouseleave = function () {
@@ -44,82 +42,12 @@
             }
 
             elementsList[2].onmouseenter = function () {
-                // console.log('aaa')
                 moveStart(this, 'opacity', 100);
             }
             elementsList[2].onmouseleave = function () {
                 moveStart(this, 'opacity', 30)
             }
 
-        }
-
-        // 获取元素属性
-        let getStyle = function (element, attr) {
-            if (element.currentStyle) {
-                return element.currentStyle[attr];
-            } else {
-                return getComputedStyle(element, false)[attr];
-            }
-        }
-        
-        // element 元素 attr 属性 target 目标值 moveMent 运动方式
-        let moveStart = function (element, attr, target, moveMent) {
-            // 默认匀速
-            moveMent = moveMent || 'line';
-            clearInterval(element.timer);
-            element.timer = setInterval(() => {
-                let opacity = 0;
-                let skip = 7;
-                // 变速运动
-                if (moveMent == 'ease') {
-                    skip = (target - parseInt(getStyle(element, attr))) / 7;
-                    if (target > parseInt(getStyle(element, attr))) {
-                        skip = Math.ceil(skip)
-                    } else {
-                        skip = Math.floor(skip);
-                    }
-                    if (target === parseInt(getStyle(element, attr))) {
-                        clearInterval(element.timer);
-                    } else {
-                        element.style[attr] = parseInt(getStyle(element, attr)) + skip + 'px';
-                    }
-                }
-                
-                // 匀速运动
-                skip = target - parseInt(getStyle(element, attr)) > 0 ? skip : -skip;
-                if (Math.abs(target - parseInt(getStyle(element, attr))) > Math.abs(skip)) {
-                    element.style[attr] = parseInt(getStyle(element, attr)) + skip + 'px';
-                } else {
-                    element.style[attr] = target + 'px';
-                }
-                
-                // 处理 opacity
-                if (attr === 'opacity') {
-                    if (target > Math.ceil(getStyle(element, 'opacity') * 100)) {
-                        opacity = Math.ceil((getStyle(element, 'opacity')) * 100);
-                    } else {
-                        let opacity = Math.floor((getStyle(element, 'opacity')) * 100);
-                    }
-                    if (target > opacity) {
-                        // skip = Math.ceil((target - opacity) / 7);
-                        skip = 1;
-                    } else {
-                        // skip = Math.floor((target - opacity) / 7);
-                        skip = -1;
-                    }
-
-                    if (target === opacity) {
-                        clearInterval(element.timer);
-                    } else {
-                        opacity += skip;
-                        element.style.opacity = opacity / 100;
-                        // console.log((opacity + skip) / 100);
-                    }
-                    
-                }
-                
-                
-            }, 30)
         }
     </script>
 </body>
