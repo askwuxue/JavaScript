@@ -21,35 +21,39 @@ let moveStart = function (element, attr, target, moveMent = 'line') {
     clearInterval(element.timer);
     element.timer = setInterval(() => {
         let skip = 7;
+        let elementAttr = getStyle(element, attr);
         // 变速运动
-        if (moveMent == 'ease') {
-            skip = (target - parseInt(getStyle(element, attr))) / 7;
-            if (target > parseInt(getStyle(element, attr))) {
-                skip = Math.ceil(skip)
+        if (moveMent === 'ease') {
+            skip = (target - parseInt(elementAttr)) / 7;
+            if (target > parseInt(elementAttr)) {
+                skip = Math.ceil(skip);
             } else {
                 skip = Math.floor(skip);
             }
-            if (target === parseInt(getStyle(element, attr))) {
+            if (target === parseInt(elementAttr)) {
                 clearInterval(element.timer);
             } else {
-                element.style[attr] = parseInt(getStyle(element, attr)) + skip + 'px';
+                element.style[attr] = parseInt(elementAttr) + skip + 'px';
             }
         }    
         // 匀速运动
-        skip = target - parseInt(getStyle(element, attr)) > 0 ? skip : -skip;
-        if (Math.abs(target - parseInt(getStyle(element, attr))) > Math.abs(skip)) {
-            element.style[attr] = parseInt(getStyle(element, attr)) + skip + 'px';
+        skip = target - parseInt(elementAttr) > 0 ? skip : -skip;
+        if (Math.abs(target - parseInt(elementAttr)) > Math.abs(skip)) {
+            element.style[attr] = parseInt(elementAttr) + skip + 'px';
         } else {
             element.style[attr] = target + 'px';
+            clearInterval(element.timer);
         }
         
         // 处理 opacity
         let opacity = null;
         if (attr === 'opacity') {
-            if (target > parseFloat(getStyle(element, 'opacity')) * 100) {
-                opacity = parseInt(parseFloat(getStyle(element, 'opacity')) * 100);
+            // getStyle 获取的是字符串
+            if (target > parseFloat(elementAttr) * 100) {
+                // 小数相加损失精度 用整数代替
+                opacity = parseInt(parseFloat(elementAttr) * 100);
             } else {
-                opacity = parseInt(parseFloat(getStyle(element, 'opacity')) * 100);
+                opacity = parseInt(parseFloat(elementAttr) * 100);
             }
             if (target > opacity) {
                 skip = Math.ceil((target - opacity) / 7);
