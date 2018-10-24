@@ -5,6 +5,7 @@ element 操作的元素
 attr 元素属性  width/height/opacity string类型
 target 目标值  opacity支持 0 - 100 width/height 支持 0 - 很大  Number类型
 moveMent 运动方式  默认line 可选 ease
+callback 回调函数
  */
 
 // 获取元素属性
@@ -16,7 +17,7 @@ let getStyle = function (element, attr) {
     }
 }
 
-let moveStart = function (element, attr, target, moveMent = 'line') {
+let moveStart = function (element, attr, target, moveMent = 'line', callback) {
     // 默认匀速
     clearInterval(element.timer);
     element.timer = setInterval(() => {
@@ -43,6 +44,10 @@ let moveStart = function (element, attr, target, moveMent = 'line') {
         } else {
             element.style[attr] = target + 'px';
             clearInterval(element.timer);
+            // callback
+            if(callback) {
+                callback();
+            }
         }
         
         // 处理 opacity
@@ -63,10 +68,13 @@ let moveStart = function (element, attr, target, moveMent = 'line') {
             // 目标值等于当前的opacity
             if (target === opacity) {
                 clearInterval(element.timer);
+                if (callback) {
+                    callback();
+                }
             } else {
                 opacity += skip;
                 element.style.opacity = opacity / 100;
             }   
         } 
-    }, 30)
+    }, 15)
 }
