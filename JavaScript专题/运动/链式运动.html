@@ -10,32 +10,22 @@
             width: 200px;
             height: 200px;
             background-color: red;
-            opacity: 1;
+            opacity: 0.3;
         }
     </style>
 </head>
 <body>
     <div></div>
-    <script src="./简易版元素自身运动属性封装.js"></script>
+    <script src="./完美运动框架.js"></script>
     <script>
         let div = document.getElementsByTagName('div')[0];
         window.onload = function () {
             div.onmouseenter = function () {
-                
-            moveStart(div, 'width', 500, 'line', function () {
-                moveStart(div, 'height', 500, function () {
-                    moveStart(div, 'opacity', 30);
+                moveStart(div, {"width": 300, "height": 300}, () => {
+                    moveStart(div, {"opacity": 100});
                 });
-            })
+            }
         }
-
-        div.onmouseleave = function () {
-            moveStart(div, 'width', 200, 'line', function () {
-                moveStart(div, 'height', 200, 'line')
-            })
-        }
-        }
-        
     </script>
 </body>
 </html>
