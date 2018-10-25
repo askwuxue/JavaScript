@@ -37,7 +37,9 @@
             border-bottom: 1px dashed #ccc;
             padding: 5px;
             /* TODO 不加下面的这句代码 会出现问题 */
+            /* 我靠，发现了一个大问题， 如果是英文字符  获取li 的行高会出现问题 */
             overflow: hidden;
+            opacity: 0;
         }
     </style>
 </head>
@@ -72,7 +74,9 @@
                     // console.log(liHeight);
                     // 将创建好的元素高度置零
                     createLi.style.height = 0;
-                    moveStart(createLi, {"height": liHeight})
+                    moveStart(createLi, {"height": liHeight},() => {
+                        moveStart(createLi, {"opacity": 100});
+                    })
                 } else {
                     ul.appendChild(createLi);
                 }
