@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul {
+            width: 400px;
+            height: 500px;
+            border: 1px solid #ccc;
+            margin: 0 auto;
+            position: relative;
+        }
+        li {
+            width: 100px;
+            height: 100px;
+            background-color: #ccc;
+            float: left;
+            list-style: none;
+            margin-left: 20px;
+            margin-top: 50px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+
+
+        <script>
+            let liList = document.getElementsByTagName('li');
+
+            for (let i = 0; i < liList.length; i++) {
+                // liList[i].innerText = liList[i].offsetTop + ', ' + liList[i].offsetLeft;
+                liList[i].style.top = liList[i].offsetTop + 'px';
+                liList[i].style.left = liList[i].offsetLeft + 'px';
+            }
+            for(let i = 0; i < liList.length; i++) {
+                liList[i].style.position = 'absolute';
+                // 将margin 清空
+                liList[i].style.margin = 0;
+            }
+        </script>
+</body>
+</html>

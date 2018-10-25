@@ -9,6 +9,7 @@ let getStyle = (element, attr) => {
 let moveStart = (element, json, callback) => {
     clearInterval(element.timer);
     element.timer = setInterval(() => {
+        console.log('start');
         let stopFlag = true;
         // 循环
         for(const key in json) {
@@ -27,7 +28,7 @@ let moveStart = (element, json, callback) => {
                 element.style.opacity = (current + skip) / 100;
             } else {
                 element.style[key] = current + skip + 'px';
-                console.log(current, json[key]);
+                // console.log(current, json[key]);
             }
 
             // 检测停止

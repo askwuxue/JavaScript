@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul {
+            width: 400px;
+            height: 500px;
+            border: 1px solid #ccc;
+            margin: 0 auto;
+            position: relative;
+        }
+        li {
+            width: 100px;
+            height: 100px;
+            background-color: #ccc;
+            float: left;
+            list-style: none;
+            margin-left: 20px;
+            margin-top: 50px;
+            box-sizing: border-box;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+
+        <script src="./完美运动框架.js"></script>
+        <script src="./随机颜色生成器.js"></script>
+        <script>
+            window.onload = function () {
+                let liList = document.getElementsByTagName('li');
+                // z-index 的当前值
+                let currZindex = 2;
+                // 布局
+                for (let i = 0; i < liList.length; i++) {
+                    // liList[i].innerText = liList[i].offsetTop + ', ' + liList[i].offsetLeft;
+                    liList[i].style.top = liList[i].offsetTop + 'px';
+                    liList[i].style.left = liList[i].offsetLeft + 'px';
+                    liList[i].style.backgroundColor = randomColorGenerator();
+                }
+                for(let i = 0; i < liList.length; i++) {
+                    liList[i].style.position = 'absolute';
+                    // 将margin 清空
+                    liList[i].style.margin = 0;
+                }
+
+                // 鼠标进入
+                for(let i = 0; i < liList.length; i++) {
+                    liList[i].onmouseenter = function () {
+                        this.style.zIndex  = currZindex++;
+                        moveStart(this, {"width": 200, "height": 200, "margin-top": -50, "margin-left": -50});
+                }
+                    liList[i].onmouseleave = function () {
+                        moveStart(this, {"width": 100, "height": 100, "margin-top": 0, "margin-left": 0})
+                    }
+                }
+                
+            }
+            
+
+
+           
+        </script>
+</body>
+</html>

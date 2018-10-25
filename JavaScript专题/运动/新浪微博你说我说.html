@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            position: relative;
+        }
+        textarea {
+            margin: 20px 0 0 20px;
+            color: black;
+            font-size: 16px;
+            padding-left: 10px;
+            padding-top: 10px;
+        }
+        input {
+            margin-left: 20px;
+        }
+        ul {
+            position: absolute;
+            left: 500px;
+            top: 20px;
+            width: 300px;
+            height: 400px;
+            list-style: none;
+            border: 1px solid #ccc;
+            overflow: auto;
+        }
+        li {
+            border-bottom: 1px dashed #ccc;
+            padding: 5px;
+            /* TODO 不加下面的这句代码 会出现问题 */
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <textarea cols="30" rows="10" placeholder="请发布您要哔哔的话" id="text"></textarea><br />
+    <input type="button" value="发布" id="btn">
+    <ul>
+        <li>这是已存在的留言</li>
+    </ul>
+
+    <script src="./完美运动框架.js"></script>
+    <script>
+        window.onload = function () {
+            let btn = document.getElementById('btn');
+            let text = document.getElementById('text');
+            let ul = document.querySelector('ul');
+            btn.onclick = function () {
+                let liList = document.querySelectorAll('li');
+                // 获取输入的内容
+                let inputText = text.value;
+                let createLi = document.createElement('li');
+                // 将内容给li
+                createLi.innerText = inputText;
+                
+                // 判断 ul > liList 的状态
+                if (liList) {
+                    ul.insertBefore(createLi, liList[0]);
+                    // 获取li 的高度
+                    let liHeight = createLi.offsetHeight;
+                     // TODO 使用下面这种方式 出现bug  无法解决	
+                    // let liHeight = getStyle(createLi, 'height');
+                    // console.log(liHeight);
+                    // 将创建好的元素高度置零
+                    createLi.style.height = 0;
+                    moveStart(createLi, {"height": liHeight})
+                } else {
+                    ul.appendChild(createLi);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
