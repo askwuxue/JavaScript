@@ -68,7 +68,7 @@
                 if (liList) {
                     ul.insertBefore(createLi, liList[0]);
                     // 获取li 的高度
-                    let liHeight = createLi.offsetHeight;
+                    // let liHeight = createLi.offsetHeight;
                      // TODO 使用下面这种方式 出现bug  无法解决	
                     // let liHeight = getStyle(createLi, 'height');
                     // console.log(liHeight);
@@ -78,7 +78,7 @@
                         moveStart(createLi, {"opacity": 100});
                     })
                 } else {
-                    ul.appendChild(createLi);
+                    ul.appendChild(createLi);                
                 }
             }
         }

@@ -58,8 +58,9 @@
                     liList[i].style.backgroundColor = randomColorGenerator();
                 }
                 for(let i = 0; i < liList.length; i++) {
+                    // 为什么不可以在上一个循环中直接 position: absolute
                     liList[i].style.position = 'absolute';
-                    // 将margin 清空
+                    // margin 清空
                     liList[i].style.margin = 0;
                 }
 
@@ -67,8 +68,10 @@
                 for(let i = 0; i < liList.length; i++) {
                     liList[i].onmouseenter = function () {
                         this.style.zIndex  = currZindex++;
+                        // 从中心点开始放大
                         moveStart(this, {"width": 200, "height": 200, "margin-top": -50, "margin-left": -50});
-                }
+                }       
+                        // 从中心点开始缩放
                     liList[i].onmouseleave = function () {
                         moveStart(this, {"width": 100, "height": 100, "margin-top": 0, "margin-left": 0})
                     }
