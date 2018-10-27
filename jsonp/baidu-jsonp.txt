@@ -1,0 +1,16 @@
+https://www.baidu.com/s?wd=%E5%91%A8%E6%9D%B0%E4%BC%A6&rsv_spt=1&rsv_iqid=0xb116c5d30003e0cb&issp=1&f=8&rsv_bp=1&rsv_idx=2&ie=utf-8&rqlang=cn&tn=baiduhome_pg&rsv_enter=1&oq=%25E5%2591%25A8%25E6%259D%25B0%25E4%25BC%25A6&rsv_t=482dO6fLV%2BfwPUyXkZYBMsdDaXVi2do3Et6w6KIiTQ1NecRLYjQj%2FRLV9ZCzUxT%2BeZxm&rsv_sug3=48&rsv_sug1=40&rsv_sug7=100&rsv_pq=de9d5ab300036543&bs=%E5%91%A8%E6%9D%B0%E4%BC%A6
+
+
+https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=%E5%91%A8%E6%9D%B0%E4%BC%A6&cb=jQuery1102042769499597025096_1540657385795&_=1540657385799
+
+
+https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=&json=1&p=3&sid=1465_21105_20881_26350&req=2&bs=%E5%91%A8%E6%9D%B0%E4%BC%A6&csor=0&cb=jQuery1102042769499597025096_1540657385795&_=1540657385796
+
+
+https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=%E5%91%A8%E6%9D%B0%E4%BC%A6&sugmode=2&json=1&p=3&sid=1465_21105_20881_26350&req=2&bs=%E5%91%A8%E6%9D%B0%E4%BC%A6&csor=3&cb=jQuery1102042769499597025096_1540657385795&_=1540657385799
+
+
+google的一个请求方式
+https://www.google.com/complete/search?client=psy-ab&hl=zh-CN&gs_rn=64&gs_ri=psy-ab&tok=H4U_LlHI1PzrU8_1NHDeBA&num=50&ei=XpvUW9bFIMuCk-4P4ISb6AU&pq=%E5%91%A8%E6%9D%B0%E4%BC%A6&cp=1&gs_id=ol&q=a&xhr=t
+
+

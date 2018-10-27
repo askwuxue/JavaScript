@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="serach"><br>
+    <ul id="ul">
+
+    </ul>
+    
+    <script>
+        window.onload = function () {
+            let ulObj = document.getElementById('ul');
+            let serachObj = document.getElementById('serach');
+            
+            window.show = function (jsonp) {
+                console.log(jsonp);
+                ulObj.innerHTML = '';
+                jsonp.s.forEach(element => {
+                    let createLi = document.createElement('li');
+                    createLi.innerText = element;
+                    ulObj.appendChild(createLi);
+
+                });
+            }
+            // 搜索框input
+            serachObj.oninput = function () {
+                let searchText = serachObj.value.trim();
+                // 不为空查询
+                if (searchText !== '') {
+                    let scriptElement = document.createElement('script');
+                    scriptElement.src = `https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=${searchText}&cb=show`;
+                    document.head.appendChild(scriptElement);
+                }
+            }
+        }
+        
+    </script>
+
+    <!-- <script src="https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=%E5%91%A8%E6%9D%B0%E4%BC%A6&cb=jQuery1102042769499597025096_1540657385795&_=1540657385799"></script> -->
+</body>
+</html>
