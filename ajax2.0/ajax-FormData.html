@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="ajax" id="ajax">
+    <script>
+        window.onload = function () {
+            var ajaxBtn = document.getElementById('ajax');
+
+             // FormData 相当于一个容器 对象 open方法 传参方式通过ForeData
+             var formData = new FormData();
+
+            function ajax () {
+
+                var xhr = new XMLHttpRequest();
+                
+                // 使用From传递参数 使用FormData 传递数据的时候 必须使用POST方法
+                // 必须使用FormData的自带API
+                formData.set('a', 1);
+                formData.set('b', 2);
+
+                // 第三个参数true是异步
+                // xhr.open('POST', '1.php', true);
+                xhr.open('GET', 'http://localhost:3000');
+                
+                // 将Form作为参数传递
+                xhr.send(formData);
+
+                xhr.onreadystatechange = function () {
+                    if (this.readyState == 4) {
+                        // 状态码为 0 的情况可能是URL不存在或者是 跨域  
+                        console.log(this.status);
+                    }
+                }
+            }
+            
+            ajaxBtn.onclick = function () {
+                // 设置 参数
+                ajax();
+            }
+        }
+    </script>
+</body>
+</html>
