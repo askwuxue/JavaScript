@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        canvas {
+            /* width: 800px;
+            height: 600px; */
+            border: 1px solid #ccc;
+            /* margin-left: 50%; */
+            /* transform: translateX(-50%); */
+            /* margin-top: 100px; */
+        }
+    </style>
+</head>
+<body>
+    <canvas width="800" height="600">您的浏览器不支持canvas......</canvas>
+    <script src="../运动/随机颜色生成器.js"></script>
+    <script>
+        window.onload = function () {
+            let canvas = document.querySelector('canvas');
+            let ctx = canvas.getContext('2d');
+            let currentX, currentY;
+            canvas.onmousedown = function (e) {
+               currentX = e.offsetX;
+               currentY = e.offsetY;
+                // 随机颜色生成
+                let color = randomColorGenerator();
+
+                // 开始绘图
+                canvas.onmousemove = function (e) {
+                // 开启新路径
+                ctx.beginPath();
+                // console.log(`起点是：${currentX}--${currentY}`);
+                // console.log(`终点是：${e.offsetX}---${e.offsetY}`);
+                ctx.moveTo(currentX, currentY);
+                ctx.lineTo(e.offsetX, e.offsetY);
+                // 更新起点的位置
+                currentX = e.offsetX;
+                currentY = e.offsetY;
+                // 描边颜色
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 5;
+                // 描边
+                ctx.stroke();
+
+                // 结束绘图
+                canvas.ondblclick = function () {
+                    console.log('结束绘图')
+                    // canvas.onmousedown = null;
+                    canvas.onmousemove = null;
+                    ctx.closePath();
+            }
+            }
+            }
+        }
+    </script>
+</body>
+</html>

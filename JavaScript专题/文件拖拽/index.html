@@ -25,10 +25,12 @@
         window.onload = function () {
             // 进入
             div.ondragenter = function () {
+                div.innerHTML = '松开鼠标'
                 console.log('dragenter....');
             }
             // 离开
             div.ondragleave = function () {
+                div.innerHTML = '将文件拖拽至此';
                 console.log('dragleave.....');
             }
             // 进入 触发多次 悬停

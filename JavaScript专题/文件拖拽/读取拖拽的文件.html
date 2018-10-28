@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            width: 400px;
+            height: 300px;
+            background-color: #ccc;
+            border: 1px solid #000;
+            margin: 0 auto;
+            margin-top: 300px;
+            text-align: center;
+            line-height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div id="div">将文将拖拽至此</div>
+    <script>
+        let div = document.getElementById('div');
+        window.onload = function () {
+            // 进入
+            div.ondragenter = function () {
+                div.innerHTML = '松开鼠标'
+                // console.log('dragenter....');
+            }
+            // 离开
+            div.ondragleave = function () {
+                div.innerHTML = '将文件拖拽至此';
+                // console.log('dragleave.....');
+            }
+
+            div.ondragover = function (e) {
+                e.preventDefault();
+            }
+
+            // 当拖拽文件放开
+            div.addEventListener('drop', function (e) {
+                // console.log('drop......');
+                file = e.dataTransfer.files[0];
+                console.log(e.dataTransfer.files[0]);
+                // e.preventDefault();
+
+                // 读取文件对象
+                let readFile = new FileReader();
+                // console.log(readFile);
+                // 读取成功  只有制定了以何种方式读取文件  当文件读取成功才会执行这个函数   读取后的成功的文件 的格式是 this.result
+                readFile.onload = function () {
+                    alert('读取文件成功');
+                    console.log(this.result);                
+                }
+
+                // 读取文件失败
+                readFile.onerror = function () {
+                    alert.log('读取失败');
+                }
+
+                // 1. 以原始的二进制的格式读取文件  当要对文件进行修改 之类的操作需要这种格式 
+                // readFile.readAsArrayBuffer(file);
+
+                // 2. 以普通文本的方式读取
+                // readFile.readAsText(file);
+                
+                // 3. 以DataURL的格式读取  base64 的方式   适用于图片的处理
+                // readFile.readAsDataURL(file);
+                
+                // 4. 以二进制文本的方式来读取  就是普通传输使用的格式   乱码的格式
+                readFile.readAsBinaryString(file);  
+
+
+                e.preventDefault();
+            },false)
+
+
+            
+        }
+    </script>
+</body>
+</html>
