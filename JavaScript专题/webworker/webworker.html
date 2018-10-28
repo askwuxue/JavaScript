@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>webWord 使用比较少， 子线程不能处理和图形有关的计算 只能处理 和计算有关的数据 在webWorker 的子进程进行ajax的 同步请求 </title>
+</head>
+<body>    <input type="text" id="num1">
+    <input type="text" id="num2">
+    <input type="button" value="给子进程去计算" id="btn">
+    <script>
+        let btn = document.getElementById('btn');
+        let num1 = document.getElementById('num1');
+        let num2 = document.getElementById('num2');
+        window.onload = function () {
+            btn.onclick = function () {
+                // 1. 创建一个子进程
+                let webWorker = new Worker('childProcess.js');
+                // 2. 给子进程分配任务
+                // 不能传递dom元素  dom元素不能clone
+                webWorker.postMessage({
+                    "num1": num1.value,
+                    "num2": num2.value
+                })
+
+                // 6 接受子线程处理后的结果
+                webWorker.onmessage = function (e) {
+                    alert(e);
+                    console.log(e.data);
+                }
+
+            }
+        }
+    </script>
+</body>
+</html>

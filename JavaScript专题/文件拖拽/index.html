@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            width: 400px;
+            height: 300px;
+            background-color: #ccc;
+            border: 1px solid #000;
+            margin: 0 auto;
+            margin-top: 300px;
+            text-align: center;
+            line-height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div id="div">将文将拖拽至此</div>
+    <script>
+        let div = document.getElementById('div');
+        window.onload = function () {
+            // 进入
+            div.ondragenter = function () {
+                console.log('dragenter....');
+            }
+            // 离开
+            div.ondragleave = function () {
+                console.log('dragleave.....');
+            }
+            // 进入 触发多次 悬停
+            // 必须禁止默认事件  否则 会影响 drop 事件 导致 drop事件事件执行
+            // div.addEventListener('dragover', function (e) {
+            //     console.log('dragover.....');
+            //     e.preventDefault();                
+            // },false);
+            div.ondragover = function (e) {
+                console.log('dragover.....');
+                // console.log(e);
+                e.preventDefault();
+            }
+
+            // 当拖拽文件放开
+            div.addEventListener('drop', function (e) {
+                console.log('drop......');
+                console.log(e);
+                // e.preventDefault();
+            },false)
+
+            // div.ondrop = function () {
+            //     console.log('drop.......');
+            // }
+        }
+    </script>
+</body>
+</html>
