@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=  , initial-scale=1.0">
+    <meta name="viewport" content="width=device-width  , initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
@@ -11,7 +11,24 @@
     <script>
         let btn = document.getElementById('btn');
         window.onload = function () {
-
+            btn.onclick = function () {
+                if (navigator.geolocation) {
+                // 单词获取
+                navigator.geolocation.getCurrentPosition(position => {
+                    // 获取经纬度
+                    // 纬度
+                    let latitude = position.coords.latitude;
+                    // 精度
+                    let longitude = position.coords.longitude;
+                    // console.log(position);
+                    alert(`当前位置，经度: ${longitude}, 纬度: ${latitude}`);
+                }, error => {
+                    console.log('获取地理位置失败.....');
+                })
+            } else {
+                alert('您的浏览器不支持定位功能.......');
+            }
+            }
         }
     </script>
 </body>
