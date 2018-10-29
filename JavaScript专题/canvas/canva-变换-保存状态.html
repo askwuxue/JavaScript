@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid #ccc;
+            margin-left: 50%;
+            transform: translateX(-50%);
+            margin-top: 200px;
+        }
+    </style>
+</head>
+<body>
+    <canvas width="800" height="600"></canvas>
+    <script>
+        let canvas = document.querySelector('canvas');
+        let ctx = canvas.getContext('2d');
+        window.onload = function () {
+
+            // 在 save 和 restore之间保存着改元素的一个所有的状态
+
+            // 保存当前的状态
+            ctx.save();
+            // 对于变换类型  是整块的画布在变化 以画布的左上角为变化点  需要通过不同的方式
+            ctx.translate(300,300);
+            // 旋转  角度为弧度 
+            ctx.rotate((Math.PI / 180) * 90);
+            // 验证 canvas的变换的中心点是画布左上角
+            // ctx.fillStyle = 'rgba(255,0,0,0.3)';
+            // ctx.fillRect(0,0,canvas.width,canvas.height);
+            // 矩形
+            ctx.strokeRect(0, 0, 200, 100);
+            // 回复状态
+            ctx.restore();
+            
+            // 先换色 后绘制
+            ctx.strokeStyle = 'red';
+            ctx.strokeRect(20, 20, 100, 50);
+        }
+    </script>
+</body>
+</html>
