@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+    body {background:black; text-align:center;}
+    #c1 {background:white;}
+    .box {
+        width: 400px;
+        height: 20px;
+        background-color: #ccc;
+    }
+    .child {
+        height: 100%;
+        width: 0%;
+        background-color: green;
+    }
+    </style>
+    <script>
+    window.onload=function (){
+      let video = document.getElementById('v1');
+      let canvas = document.getElementById('c1');
+      let btn1 = document.getElementById('btn1');
+      let btn2 = document.getElementById('btn2');
+      let ctx = canvas.getContext('2d');
+    
+      // 无法工作
+    //   video.addEventListener('durationchange', function () {
+    //     // console.log(e);
+    //     console.log(this.duration);
+    // }, false)
+
+    // let that = this;
+    // video.addEventListener('loadedmetadata', function (e) {
+    //     // console.log(e);
+    //     that.duration = this.duration;
+    // }, false)
+
+    // console.log(video.duration);
+
+      // 绘制视频
+      let next = () => {
+          // 请求一帧
+          requestAnimationFrame(() => {
+              // 精简版绘制图像 图像  x  y
+              ctx.drawImage(video, 0, 0);
+              next();
+          })
+      }
+      next();
+      
+      // 播放
+      btn1.onclick = function () {
+          video.play();
+      }
+
+      // 暂停
+      btn2.onclick = function () {
+          video.pause();
+      }
+
+      /*setInterval(function (){
+        gd.drawImage(oV, 0, 0);
+      }, 16);*/
+
+      // 加载失败
+      video.onerror = function () {
+          console.log('视频加载失败....请稍后再试');
+      }
+
+      // 播放进度控制
+      // 播放时间发生改变的时候
+      let duration = video.duration;
+      video.ontimeupdate = function () {
+          // 当前播放位置
+          let currentTime = this.currentTime;
+          let pre = (100 * currentTime / duration).toFixed(2) + '%';
+          let child = document.querySelector('.child');
+          child.style.width = pre;
+      }
+    };
+    </script>
+  </head>
+  <body>
+      <div class="box">
+          <div class="child"></div>
+      </div>
+    <input type="button" value="播放" id="btn1">
+    <input type="button" value="暂停" id="btn2"><br>
+    <video id="v1" src="a.mp4" style="display:none"></video>
+    <canvas id="c1" width="636" height="360"></canvas>
+  </body>
+</html>
