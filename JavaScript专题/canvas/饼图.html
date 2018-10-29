@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        canvas {
+            /* margin: auto 0; */
+            border: 1px solid #ccc;
+            margin-left: 50%;
+            transform: translateX(-50%);
+            margin-top: 200px;
+        }
+    </style>
+</head>
+<body>
+    <canvas width="800" height="600"></canvas>
+    <script>
+        // 准备数据
+        let data = [
+            {
+                "people": "异性恋",
+                "num": 80
+            },
+            {
+                "people": "女女恋",
+                "num": 5
+            },
+            {
+                "poople": "基佬",
+                "num": 15 
+            }
+        ];
+        // 数据处理
+        let sum = 0;
+        data.forEach((item) => {
+            sum += item.num;
+        })
+        // 计算占比 占有的角度值是多少
+        let per = data.map((item) => {
+            return (item.num / sum) * 360;
+        })
+        // console.log(per);
+
+        // 角度转弧度
+        let angleToRadian = (angle) => {
+            return angle * (Math.PI / 180);
+        }
+    
+        // 计算占有的弧度值
+        let radian = per.map((item) => {
+            return angleToRadian(item);
+        })
+
+        window.onload = function () {
+            let canvas = document.querySelector('canvas');
+            let ctx = canvas.getContext('2d');
+            ctx.arc(300, 300, 200, 0, 360 * Math.PI / 180, true);
+            ctx.stroke();
+        }
+        
+        // console.log(radian);
+
+        // console.log(angleToRadian(90));
+
+    </script>
+</body>
+</html>

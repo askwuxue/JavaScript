@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>canvas运动的原理就是将已经画好的图形清除，然后重新绘制</title>
+    <style>
+        canvas {
+            border: 1px solid #ccc;
+            margin-left: 50%;
+            transform: translateX(-50%);
+            margin-top: 200px;
+        }
+    </style>
+</head>
+<body>
+    <canvas width="800" height="600"></canvas>
+    <script>
+        let canvas = document.querySelector('canvas');
+        let ctx = canvas.getContext('2d');
+        ctx.strokeRect(100, 100, 200, 100);
+        window.onload = function () {
+            let startX = 100;
+            let skip = 5;
+            setInterval(() => {
+                // 先清除  后运动
+                ctx.clearRect(0 , 0, canvas.width, canvas.height);
+                ctx.strokeRect(startX, 100, 200, 100);
+                startX += skip;
+            }, 16)
+        }
+    </script>
+</body>
+</html>
