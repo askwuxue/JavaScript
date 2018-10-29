@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- multiple 属性 ? -->
+    <input type="file" name="file" multiple id="file">
+    <input type="button" id="btn" value="button">
+    <script>
+        window.onload = function () {
+            // 表单的files伪数组中存在这上传的文件
+            let file = document.getElementById('file');
+            let btn = document.getElementById('btn');
+            btn.onclick = function () {
+                // console.log(file.files);
+                // 使用ajax的方式上传文件
+                let xhr = new XMLHttpRequest();
+                
+                // 创建FormData 上传文件
+                let formData = new FormData();
+
+                // 添加
+                formData.set('file', file.files[0]);
+
+                xhr.open('POST', 'http://localhost:3000/upload', true);
+
+                xhr.send(formData);
+
+                xhr.onreadystatechange = function () {
+                    if (this.readyState == 4) {
+                        console.log(this.status);
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

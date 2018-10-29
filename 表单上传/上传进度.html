@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+    .box {width:400px;height:20px; background:#CCC;}
+    .child {height:100%; background:green; width:0;}
+    </style>
+    <script>
+    window.onload=function (){
+      let file=Array.from(document.getElementsByName('f1'));
+      let btn=document.getElementById('btn1');
+    
+    btn.onclick = function () {
+
+        let xhr = new XMLHttpRequest();
+
+        let formData = new FormData();
+        
+        // 取到的也是伪数组
+        Array.from(file).forEach(file => {
+            Array.from(file.files).forEach(item => {
+                formData.append('file', item);
+            })
+        })
+
+        // 上传成功
+        xhr.upload.onload = function () {
+            console.log('上传成功');
+        }
+
+        // 上传失败
+        xhr.upload.onerror = function () {
+            console.log('上传失败');
+        }
+
+        // 上传进度
+        xhr.upload.onprogress = function (e) {
+            // 已上传 上传文件总长
+            let pre =(100 * e.loaded / e.total).toFixed(2) + '%';
+            let child = document.querySelector('.child');
+            child.style.width = pre;
+        }
+
+        xhr.open('POST', 'http://localhost:3000/upload', true);
+
+        xhr.send(formData);
+
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4) {
+                console.log(this.status);
+            }
+        }
+    }
+
+    };
+    </script>
+  </head>
+  <body>
+    <div class="box">
+      <div class="child"></div>
+    </div>
+    <input type="file" name="f1" multiple>
+    <input type="button" value="上传" id="btn1">
+  </body>
+</html>

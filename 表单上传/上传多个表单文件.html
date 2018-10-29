@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="file" name="file" id="file1" multiple><br />
+    <input type="file" name="file" id="file2" multiple><br />
+    <input type="file" name="file" id="file3" multiple><br />
+    <input type="file" name="file" id="file4" multiple><br />
+    <!-- 上传多个表单文件的方式是 给多个表单文件设置相同的name 在PHP中 -->
+    <input type="button" id="btn" value="上传多个表单文件">
+    <script>
+        window.onload = function () {
+            let file1 = document.getElementById('file1');
+            let file2 = document.getElementById('file2');
+            let file3 = document.getElementById('file3');
+            let file4 = document.getElementById('file4');
+            let btn = document.getElementById('btn');
+            btn.onclick = function () {
+                let xhr = new XMLHttpRequest();
+
+                let formData = new FormData();
+                
+                // 维数组 转数组 追加 FormData
+                Array.from(file1.files).concat(Array.from(file2.files)).concat(Array.from(file3.files)).forEach((item) => {
+                    formData.append('file', item);
+                })
+
+                xhr.open('POST', 'http://localhost:3000/upload', true);
+
+                xhr.send(formData);
+
+                xhr.onreadystatechange = function () {
+                    if (this.readyState == 4) {
+                        console.log(this.status);
+                    }
+                }
+            }
+
+        }
+    </script>
+</body>
+</html>
