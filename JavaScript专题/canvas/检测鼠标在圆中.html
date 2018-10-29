@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid #ccc;
+            margin-left: 50%;
+            transform: translateX(-50%);
+            margin-top: 200px;
+        }
+    </style>
+</head>
+<body>
+    <canvas width="800" height="600"></canvas>
+    <script src="../运动/随机颜色生成器.js"></script>
+    <script>
+        window.onload = function () {
+            let canvas = document.querySelector('canvas');
+            let ctx = canvas.getContext('2d');
+            // console.log(ctx);
+            // 圆心  半径  开始/结束位置  单位=弧度  是否逆时针
+            ctx.arc(300, 300, 200, 0, 360 * (Math.PI / 180), false);
+            // ctx.fillStyle = 'pink';
+            // ctx.stroke();
+            // ctx.fill();
+            // 鼠标移入圆内区域
+            canvas.onmousemove = function (e) {
+                // 鼠标的坐标
+                let currentX = e.offsetX;
+                let currentY = e.offsetY;
+                // 圆心的坐标
+                let arcX = 300;
+                let arcY = 300;
+                // 圆的半径
+                let radius = 200;
+                // 计算两点之间的距离
+                let distance = Math.sqrt(Math.pow((currentX - arcX), 2) + Math.pow((currentY - arcX), 2));
+                // 在圆外
+                if (distance > radius) {
+                    console.log('院外');
+                    ctx.fillStyle = 'green';
+                    ctx.fill()
+                } else {
+                    ctx.fillStyle = 'purple';
+                    ctx.fill()
+                }
+            }
+        }
+    </script>
+</body>
+</html>
