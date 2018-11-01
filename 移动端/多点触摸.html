@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            position: relative;
+        }
+        a {
+            display: block;
+            width: 100px;
+            height: 100px;
+            position: absolute;
+        }
+        a:nth-child(1) {
+            background-color: purple;
+        }
+        a:nth-child(2) {
+            background-color: red;
+            top: 100px;
+            left: 100px;
+        }
+        a:nth-child(3) {
+            background-color: pink;
+            top: 200px;
+            left: 200px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        <a href="" class="first"></a>
+        <a href=""></a>
+        <a href=""></a>
+    </div>
+
+    <script>
+        window.onload = function () {
+            let aList = document.getElementsByTagName('a');
+            
+            let drag = function (element) {
+                element.addEventListener('touchstart', (e) => {
+
+                    // 存放当前目标 id
+                    let id = e.changedTouches[0].identifier;
+                    // console.log(e);
+                    let distanceX = e.targetTouches[0].pageX - element.offsetLeft;
+                    let distanceY = e.targetTouches[0].pageY - element.offsetTop;
+                    // console.log(distanceX, distanceY);
+                    // 阻止默认事件
+                    e.preventDefault();
+
+                    let touchmove = (e) => {
+                        // 当有多个手指在一个物体上 只处理第一个手指
+                        element.style.left = e.targetTouches[0].pageX - distanceX + 'px';
+                        // console.log(e.targetTouches[0], distanceX);
+                        element.style.top = e.targetTouches[0].pageY - distanceY + 'px';
+                        // 阻止默认事件
+                        // console.log('move');
+                        e.preventDefault();
+                    }
+
+                    let touchend = (e) => {
+                        let flag = false;
+                        // 根据
+                        Array.from(e.changedTouches).forEach(item => {
+                            // 比对id
+                            if (item.identifier == id) {
+                                flag = true;
+                            }
+                        })
+                        if (flag) {
+                            // 移除事件
+                        element.removeEventListener('touchstart', touchmove, false);
+                        element.removeEventListener('touchend', touchend, false);
+                        }
+                    }
+                    // touchmove 和 touchend 事件
+                    element.addEventListener('touchmove', touchmove, false);
+                    element.addEventListener('touchend', touchend, false);
+                })
+            }
+
+            Array.from(aList).forEach(item => {
+                drag(item);
+            })
+        }
+    </script>
+</body>
+</html>
