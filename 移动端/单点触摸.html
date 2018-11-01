@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html {
+            font-size: 100px;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            height: 2000px;
+        }
+        .box {
+            width: 1rem;
+            height: 1rem;
+            background-color: #ccc;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <script>
+        window.onload = function () {
+            let div = document.getElementsByClassName('box')[0];
+            // 开始
+            div.addEventListener('touchstart', (e) => {
+                // targetTouches 存放同时有几只手机操作屏幕 
+                let distanceX = e.targetTouches[0].pageX - div.offsetLeft;
+                let distanceY = e.targetTouches[0].pageY - div.offsetTop;
+
+                e.cancelBubble = true;
+                e.preventDefault();
+
+                function touchmove (e) {
+                    div.style.left = e.targetTouches[0].pageX - distanceX + 'px';
+                    div.style.top = e.targetTouches[0].pageY - distanceY + 'px';
+                }
+
+                 function touchend () {
+                    div.removeEventListener('touchmove', touchmove, false);
+                    div.removeEventListener('touchend', touchend, false);
+                }
+                
+                div.addEventListener('touchmove', touchmove, false);
+                div.addEventListener('touchend', touchend, false);
+
+                // false 事件冒泡
+            }, false)
+        }
+    </script>
+</body>
+</html>
