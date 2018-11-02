@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no ,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        html {
+            font-size: 20px;
+        }
+        #banner {
+            width: 25rem;
+            height: 7.8rem;
+            overflow: hidden;
+        }
+        #banner ul {
+            width: 125rem;
+            transform: translateX(0);
+        }
+        #banner ul li {
+            width: 25rem;
+            height: 7.8rem;
+            float: left;
+            line-height: 7.8rem;
+            text-align: center;
+        }
+        li:nth-child(1) {
+            background-color: #f0c;
+        }
+        li:nth-child(2) {
+            background-color: #cc0;
+        }
+        li:nth-child(3) {
+            background-color: #abc;
+        }
+        li:nth-child(4) {
+            background-color: #0f0;
+        }
+        li:nth-child(5) {
+            background-color: #f00;
+        }
+        #content {
+            background-color: #fff;
+            transform: translateY(0);
+        }
+        #wrap {
+            background-color: #ccc;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div id="content">
+            <div id="banner">
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function () {
+
+            // 基准宽度设置为500 根据移动设备的宽度自动适应宽度  利用rem
+            document.documentElement.style.fontSize = document.documentElement.clientWidth * parseInt(getComputedStyle(document.documentElement, false)['font-size']) / 500 + 'px';
+            // 获取content
+            let content = document.getElementById('content');
+            
+            let banner = document.getElementById('banner');
+            // 拖动开始
+            banner.addEventListener('touchstart', (e) => {
+                // 起始位置
+                let startX = e.targetTouches[0].clientX;
+                let startY = e.targetTouches[0].clientY;
+                // 获取banner 中的内容
+                let bannerList = banner.children[0];
+                // console.log(bannerList);
+                // 移动函数
+                let touchmove = (e) => {
+                    let direction = ''
+                    let moveDistanceX = e.targetTouches[0].clientX - startX;
+                    let moveDistanceY = e.targetTouches[0].clientY - startY;
+                    // console.log(moveDistanceX, moveDistanceY)
+                    // 判断移动方向
+                    if (!direction) {
+                        if (Math.abs(moveDistanceX) > 5) {
+                        direction = 'x';
+                    } else if (Math.abs(moveDistanceY > 5)) {
+                        direction = 'y';
+                    }
+                    } 
+                    // 处理方向
+                    if (direction == 'x') {
+                            bannerList.style.transform = `translateX(${moveDistanceX}px)`;
+                        // 处理上下的移动
+                    } else if (direction == 'y') {
+                        content.style.transform = `translateY(${moveDistanceY}px)`;
+                    }
+                    // console.log(direction);
+                }
+
+                // 移动结束函数
+                let touchend = () => {
+                    banner.removeEventListener('touchmove', touchmove, false);
+                    banner.removeEventListener('touchend', touchend, false);
+                }
+                // 拖动
+                banner.addEventListener('touchmove', touchmove, false);
+                // 结束
+                banner.addEventListener('touchend', touchend, false);
+            },false);
+        }
+    </script>
+</body>
+</html>
