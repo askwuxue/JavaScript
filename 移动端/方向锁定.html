@@ -77,15 +77,15 @@
             document.documentElement.style.fontSize = document.documentElement.clientWidth * parseInt(getComputedStyle(document.documentElement, false)['font-size']) / 500 + 'px';
             // 获取content
             let content = document.getElementById('content');
-            
+            // 获取banner 中的内容
+            let bannerList = banner.children[0];
             let banner = document.getElementById('banner');
             // 拖动开始
             banner.addEventListener('touchstart', (e) => {
                 // 起始位置
                 let startX = e.targetTouches[0].clientX;
                 let startY = e.targetTouches[0].clientY;
-                // 获取banner 中的内容
-                let bannerList = banner.children[0];
+                
                 // console.log(bannerList);
                 // 移动函数
                 let touchmove = (e) => {
